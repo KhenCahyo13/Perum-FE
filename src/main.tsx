@@ -4,7 +4,7 @@ import { createRouter } from '@tanstack/react-router';
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 
-import AppProvider from './components/core/app-provider.tsx';
+import { AppProvider } from './components/core';
 import { routeTree } from './routeTree.gen';
 
 // Tanstack Router
