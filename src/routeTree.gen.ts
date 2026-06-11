@@ -8,55 +8,110 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router'
 
-import { Route as rootRouteImport } from './routes/__root';
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as authenticatedRouteRouteImport } from './routes/(authenticated)/route'
 
-const AuthLoginLazyRouteImport = createFileRoute('/auth/login')();
+const AuthLoginLazyRouteImport = createFileRoute('/auth/login')()
+const authenticatedDashboardIndexLazyRouteImport = createFileRoute(
+  '/(authenticated)/dashboard/',
+)()
 
+const authenticatedRouteRoute = authenticatedRouteRouteImport.update({
+  id: '/(authenticated)',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthLoginLazyRoute = AuthLoginLazyRouteImport.update({
-    id: '/auth/login',
-    path: '/auth/login',
-    getParentRoute: () => rootRouteImport,
-} as any).lazy(() => import('./routes/auth/login.lazy').then((d) => d.Route));
+  id: '/auth/login',
+  path: '/auth/login',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/auth/login.lazy').then((d) => d.Route))
+const authenticatedDashboardIndexLazyRoute =
+  authenticatedDashboardIndexLazyRouteImport
+    .update({
+      id: '/dashboard/',
+      path: '/dashboard/',
+      getParentRoute: () => authenticatedRouteRoute,
+    } as any)
+    .lazy(() =>
+      import('./routes/(authenticated)/dashboard/index.lazy').then(
+        (d) => d.Route,
+      ),
+    )
 
 export interface FileRoutesByFullPath {
-    '/auth/login': typeof AuthLoginLazyRoute;
+  '/auth/login': typeof AuthLoginLazyRoute
+  '/dashboard/': typeof authenticatedDashboardIndexLazyRoute
 }
 export interface FileRoutesByTo {
-    '/auth/login': typeof AuthLoginLazyRoute;
+  '/auth/login': typeof AuthLoginLazyRoute
+  '/dashboard': typeof authenticatedDashboardIndexLazyRoute
 }
 export interface FileRoutesById {
-    __root__: typeof rootRouteImport;
-    '/auth/login': typeof AuthLoginLazyRoute;
+  __root__: typeof rootRouteImport
+  '/(authenticated)': typeof authenticatedRouteRouteWithChildren
+  '/auth/login': typeof AuthLoginLazyRoute
+  '/(authenticated)/dashboard/': typeof authenticatedDashboardIndexLazyRoute
 }
 export interface FileRouteTypes {
-    fileRoutesByFullPath: FileRoutesByFullPath;
-    fullPaths: '/auth/login';
-    fileRoutesByTo: FileRoutesByTo;
-    to: '/auth/login';
-    id: '__root__' | '/auth/login';
-    fileRoutesById: FileRoutesById;
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths: '/auth/login' | '/dashboard/'
+  fileRoutesByTo: FileRoutesByTo
+  to: '/auth/login' | '/dashboard'
+  id:
+    | '__root__'
+    | '/(authenticated)'
+    | '/auth/login'
+    | '/(authenticated)/dashboard/'
+  fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-    AuthLoginLazyRoute: typeof AuthLoginLazyRoute;
+  authenticatedRouteRoute: typeof authenticatedRouteRouteWithChildren
+  AuthLoginLazyRoute: typeof AuthLoginLazyRoute
 }
 
 declare module '@tanstack/react-router' {
-    interface FileRoutesByPath {
-        '/auth/login': {
-            id: '/auth/login';
-            path: '/auth/login';
-            fullPath: '/auth/login';
-            preLoaderRoute: typeof AuthLoginLazyRouteImport;
-            parentRoute: typeof rootRouteImport;
-        };
+  interface FileRoutesByPath {
+    '/(authenticated)': {
+      id: '/(authenticated)'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof authenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
     }
+    '/auth/login': {
+      id: '/auth/login'
+      path: '/auth/login'
+      fullPath: '/auth/login'
+      preLoaderRoute: typeof AuthLoginLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(authenticated)/dashboard/': {
+      id: '/(authenticated)/dashboard/'
+      path: '/dashboard'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof authenticatedDashboardIndexLazyRouteImport
+      parentRoute: typeof authenticatedRouteRoute
+    }
+  }
 }
 
+interface authenticatedRouteRouteChildren {
+  authenticatedDashboardIndexLazyRoute: typeof authenticatedDashboardIndexLazyRoute
+}
+
+const authenticatedRouteRouteChildren: authenticatedRouteRouteChildren = {
+  authenticatedDashboardIndexLazyRoute: authenticatedDashboardIndexLazyRoute,
+}
+
+const authenticatedRouteRouteWithChildren =
+  authenticatedRouteRoute._addFileChildren(authenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-    AuthLoginLazyRoute: AuthLoginLazyRoute,
-};
+  authenticatedRouteRoute: authenticatedRouteRouteWithChildren,
+  AuthLoginLazyRoute: AuthLoginLazyRoute,
+}
 export const routeTree = rootRouteImport
-    ._addFileChildren(rootRouteChildren)
-    ._addFileTypes<FileRouteTypes>();
+  ._addFileChildren(rootRouteChildren)
+  ._addFileTypes<FileRouteTypes>()
