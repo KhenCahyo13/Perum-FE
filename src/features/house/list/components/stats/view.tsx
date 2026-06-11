@@ -5,7 +5,7 @@ import {
 } from '@tabler/icons-react';
 import type { FC } from 'react';
 
-import { StatsCard } from '@/components/data/stats-card';
+import { StatsCard } from '@/components/data';
 import { ImageFallback, LoaderFallback } from '@/components/fallback';
 import { InsideSheetWrapper } from '@/components/layout';
 
@@ -33,6 +33,7 @@ const HouseListStatsView: FC<HouseListStatsViewProps> = ({
                     <StatsCard
                         icon={IconBuildingCommunity}
                         iconContainerColor="bg-blue-100 text-blue-600"
+                        textColor="text-blue-600"
                         title="Total Rumah"
                         value={stats?.totalHouses ?? 0}
                     />

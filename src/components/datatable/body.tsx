@@ -1,5 +1,6 @@
 import {
     flexRender,
+    type Row,
     type Table as TanstackTableType,
 } from '@tanstack/react-table';
 import { type JSX } from 'react';
@@ -19,6 +20,7 @@ interface DataTableBodyProps<TTable> {
     isError: boolean;
     isLoading: boolean;
     loaderMessage?: string;
+    onRowClick?: (row: Row<TTable>) => void;
     refetchData: () => void;
     table: TanstackTableType<TTable>;
 }
@@ -28,6 +30,7 @@ function DataTableBodyBase<TTable>({
     isError,
     isLoading,
     loaderMessage = 'Loading data...',
+    onRowClick,
     refetchData,
     table,
 }: DataTableBodyProps<TTable>): JSX.Element {
@@ -76,8 +79,16 @@ function DataTableBodyBase<TTable>({
                     ) : table.getRowModel().rows?.length ? (
                         table.getRowModel().rows.map((row) => (
                             <TableRow
+                                className={
+                                    onRowClick ? 'cursor-pointer' : undefined
+                                }
                                 data-state={row.getIsSelected() && 'selected'}
                                 key={row.id}
+                                onClick={
+                                    onRowClick
+                                        ? () => onRowClick(row)
+                                        : undefined
+                                }
                             >
                                 {row.getVisibleCells().map((cell) => (
                                     <TableCell key={cell.id}>

@@ -9,9 +9,10 @@ import { queryKeys } from '@/lib/query-keys';
 import HouseListFilters from '../filters';
 import type { HouseListFiltersValue } from '../filters/types';
 import { createHouseListTableColumns } from './table-column';
+import type { HouseListDataTableProps } from './types';
 import HouseListDataTableView from './view';
 
-const HouseListDataTable = () => {
+const HouseListDataTable = ({ onSelectHouse }: HouseListDataTableProps) => {
     const limit = useDataTableContext((s) => s.limit);
     const page = useDataTableContext((s) => s.page);
     const search = useDataTableContext((s) => s.search);
@@ -71,6 +72,7 @@ const HouseListDataTable = () => {
             filtersContent={filtersContent}
             isError={isError}
             isLoading={isLoading}
+            onRowClick={onSelectHouse}
             pagination={data?.meta}
             refetch={refetch}
             table={table}
