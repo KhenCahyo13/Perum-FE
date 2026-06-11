@@ -8,55 +8,55 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router';
 
-import { Route as rootRouteImport } from './routes/__root'
+import { Route as rootRouteImport } from './routes/__root';
 
-const AuthLoginLazyRouteImport = createFileRoute('/auth/login')()
+const AuthLoginLazyRouteImport = createFileRoute('/auth/login')();
 
 const AuthLoginLazyRoute = AuthLoginLazyRouteImport.update({
-  id: '/auth/login',
-  path: '/auth/login',
-  getParentRoute: () => rootRouteImport,
-} as any).lazy(() => import('./routes/auth/login.lazy').then((d) => d.Route))
+    id: '/auth/login',
+    path: '/auth/login',
+    getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/auth/login.lazy').then((d) => d.Route));
 
 export interface FileRoutesByFullPath {
-  '/auth/login': typeof AuthLoginLazyRoute
+    '/auth/login': typeof AuthLoginLazyRoute;
 }
 export interface FileRoutesByTo {
-  '/auth/login': typeof AuthLoginLazyRoute
+    '/auth/login': typeof AuthLoginLazyRoute;
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport
-  '/auth/login': typeof AuthLoginLazyRoute
+    __root__: typeof rootRouteImport;
+    '/auth/login': typeof AuthLoginLazyRoute;
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/auth/login'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/auth/login'
-  id: '__root__' | '/auth/login'
-  fileRoutesById: FileRoutesById
+    fileRoutesByFullPath: FileRoutesByFullPath;
+    fullPaths: '/auth/login';
+    fileRoutesByTo: FileRoutesByTo;
+    to: '/auth/login';
+    id: '__root__' | '/auth/login';
+    fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
-  AuthLoginLazyRoute: typeof AuthLoginLazyRoute
+    AuthLoginLazyRoute: typeof AuthLoginLazyRoute;
 }
 
 declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/auth/login': {
-      id: '/auth/login'
-      path: '/auth/login'
-      fullPath: '/auth/login'
-      preLoaderRoute: typeof AuthLoginLazyRouteImport
-      parentRoute: typeof rootRouteImport
+    interface FileRoutesByPath {
+        '/auth/login': {
+            id: '/auth/login';
+            path: '/auth/login';
+            fullPath: '/auth/login';
+            preLoaderRoute: typeof AuthLoginLazyRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
     }
-  }
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  AuthLoginLazyRoute: AuthLoginLazyRoute,
-}
+    AuthLoginLazyRoute: AuthLoginLazyRoute,
+};
 export const routeTree = rootRouteImport
-  ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+    ._addFileChildren(rootRouteChildren)
+    ._addFileTypes<FileRouteTypes>();
