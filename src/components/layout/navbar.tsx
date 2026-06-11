@@ -40,7 +40,7 @@ export const navItems = [
 
 export const Navbar = () => (
     <header>
-        <nav className="flex items-center justify-between bg-white px-8 py-3 border-b border-border">
+        <nav className="flex items-center justify-between border-b border-border bg-white px-8 py-3">
             <h1 className="font-medium">Perum App</h1>
             <NavigationMenu>
                 <NavigationMenuList className="gap-x-3">
@@ -56,14 +56,14 @@ export const Navbar = () => (
             </NavigationMenu>
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button className='rounded-full h-11' variant="outline">
+                    <Button className="h-11 rounded-full" variant="outline">
                         <Avatar>
                             <AvatarFallback>KH</AvatarFallback>
                         </Avatar>
                         Khen Cahyo
                     </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align='center' className='min-w-44'>
+                <DropdownMenuContent align="center" className="min-w-44">
                     <DropdownMenuItem className="text-destructive">
                         <IconLogout /> Logout
                     </DropdownMenuItem>
