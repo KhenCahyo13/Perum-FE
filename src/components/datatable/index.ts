@@ -1,8 +1,8 @@
 export { DataTableBody } from './body';
 export { DataTableCell } from './cell';
 export { useDataTableContext } from './context';
-export { DataTableFilterDateRangeInput } from './filter-date-range-input';
 export { DataTableFilterDateInput } from './filter-date-input';
+export { DataTableFilterDateRangeInput } from './filter-date-range-input';
 export { DataTableFilterDialog } from './filter-dialog';
 export { DataTableFilterSearchableSelect } from './filter-searchable-select';
 export { DataTableFilterSelect } from './filter-select';

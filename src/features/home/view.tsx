@@ -3,7 +3,6 @@ import { Card, CardContent } from '@/components/ui/card';
 
 const HomeView = () => (
     <PageWrapper
-        title="Rumah"
         description="Manajemen data rumah Anda dengan mudah"
         insideSheetContent={
             <>
@@ -12,6 +11,7 @@ const HomeView = () => (
                 </InsideSheetWrapper>
             </>
         }
+        title="Rumah"
     >
         <Card>
             <CardContent>
