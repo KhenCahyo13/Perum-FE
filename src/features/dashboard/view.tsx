@@ -1,7 +1,17 @@
+import { InsideSheetWrapper, PageWrapper } from '@/components/layout';
+import { Card, CardContent } from '@/components/ui/card';
+
 const DashboardView = () => (
-    <div>
-        <h1 className="text-2xl font-semibold">Dashboard</h1>
-    </div>
+    <PageWrapper title="Dashboard" description="Selamat datang di dashboard Anda">
+        <Card>
+            <CardContent>
+                <p>Dashboard Card Content</p>
+            </CardContent>
+        </Card>
+        <InsideSheetWrapper>
+            <p>Dashboard Inside Sheet</p>
+        </InsideSheetWrapper>
+    </PageWrapper>
 );
 
 export default DashboardView;

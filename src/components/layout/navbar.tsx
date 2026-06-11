@@ -27,7 +27,7 @@ export const navItems = [
         label: 'Dashboard',
     },
     {
-        href: '/dashboard',
+        href: '/home',
         icon: IconHome2,
         label: 'Rumah',
     },

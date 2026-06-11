@@ -1,3 +1,5 @@
+export type UserRole = string;
+
 export interface AuthUser {
     created_at: string;
     email: string;
