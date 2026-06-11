@@ -7,5 +7,6 @@ export type LoginFormValues = z.infer<typeof loginFormSchema>;
 
 export interface LoginViewProps {
     form: UseFormReturn<LoginFormValues>;
+    isLoadingLogin: boolean;
     onSubmit: (values: LoginFormValues) => void;
 }

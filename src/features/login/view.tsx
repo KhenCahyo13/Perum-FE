@@ -5,7 +5,7 @@ import { FieldGroup } from '@/components/ui/field';
 
 import type { LoginViewProps } from './types';
 
-const LoginView = ({ form, onSubmit }: LoginViewProps) => (
+const LoginView = ({ form, isLoadingLogin, onSubmit }: LoginViewProps) => (
     <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-background p-6 md:p-10">
         <div className="w-full max-w-sm">
             <div className="mb-8 flex flex-col items-center gap-2 text-center">
@@ -39,7 +39,9 @@ const LoginView = ({ form, onSubmit }: LoginViewProps) => (
                         required
                         type="password"
                     />
-                    <RhSubmitButton isLoading={false}>Login</RhSubmitButton>
+                    <RhSubmitButton isLoading={isLoadingLogin}>
+                        Login
+                    </RhSubmitButton>
                 </FieldGroup>
             </form>
         </div>
