@@ -86,7 +86,7 @@ function RhTextInputBase<
 
                     <div
                         className={cn(
-                            'flex items-center rounded-full border read-only:bg-muted',
+                            'flex items-center rounded-full border read-only:bg-muted/50',
                             'focus-within:ring-2 focus-within:ring-ring',
                             fieldState.invalid && 'border-destructive'
                         )}

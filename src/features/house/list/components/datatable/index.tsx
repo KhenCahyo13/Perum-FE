@@ -12,7 +12,10 @@ import { createHouseListTableColumns } from './table-column';
 import type { HouseListDataTableProps } from './types';
 import HouseListDataTableView from './view';
 
-const HouseListDataTable = ({ onSelectHouse }: HouseListDataTableProps) => {
+const HouseListDataTable = ({
+    onAddClick,
+    onSelectHouse,
+}: HouseListDataTableProps) => {
     const limit = useDataTableContext((s) => s.limit);
     const page = useDataTableContext((s) => s.page);
     const search = useDataTableContext((s) => s.search);
@@ -72,6 +75,7 @@ const HouseListDataTable = ({ onSelectHouse }: HouseListDataTableProps) => {
             filtersContent={filtersContent}
             isError={isError}
             isLoading={isLoading}
+            onAddClick={onAddClick}
             onRowClick={onSelectHouse}
             pagination={data?.meta}
             refetch={refetch}

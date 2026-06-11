@@ -15,6 +15,7 @@ const HouseListDataTableView: FC<HouseListDataTableViewProps> = ({
     filtersContent,
     isError,
     isLoading,
+    onAddClick,
     onRowClick,
     pagination,
     refetch,
@@ -22,7 +23,9 @@ const HouseListDataTableView: FC<HouseListDataTableViewProps> = ({
 }) => (
     <DataTable>
         <DataTableHeader
+            addButtonLabel="Tambah Rumah"
             filtersContent={filtersContent}
+            onAddClick={onAddClick}
             searchPlaceholder="Cari nomor rumah atau alamat..."
         />
         <DataTableBody

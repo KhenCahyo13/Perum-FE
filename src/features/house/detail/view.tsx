@@ -9,7 +9,7 @@ import {
     IconUser,
     IconUsers,
 } from '@tabler/icons-react';
-import type { FC } from 'react';
+import type { FC, memo } from 'react';
 
 import { BoxPreview, DataPreview } from '@/components/data';
 import {
@@ -142,4 +142,4 @@ const HouseDetailView: FC<HouseDetailViewProps> = ({
     </InsideSheetWrapper>
 );
 
-export default HouseDetailView;
+export default memo(HouseDetailView);

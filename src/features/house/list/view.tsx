@@ -1,30 +1,36 @@
 import { useState } from 'react';
 
 import { PageWrapper } from '@/components/layout';
+import HouseCreate from '@/features/house/create';
 import HouseDetail from '@/features/house/detail';
 
 import HouseListDataTable from './components/datatable';
 import HouseListStats from './components/stats';
 
+type HouseListPanel = 'create' | 'stats' | { id: string; type: 'detail' };
+
 const HouseListView = () => {
-    const [selectedHouseId, setSelectedHouseId] = useState<null | string>(null);
+    const [panel, setPanel] = useState<HouseListPanel>('stats');
+
+    const insideSheetContent =
+        panel === 'create' ? (
+            <HouseCreate onClose={() => setPanel('stats')} />
+        ) : typeof panel === 'object' ? (
+            <HouseDetail houseId={panel.id} onClose={() => setPanel('stats')} />
+        ) : (
+            <HouseListStats />
+        );
 
     return (
         <PageWrapper
             description="Manajemen data rumah Anda dengan mudah"
-            insideSheetContent={
-                selectedHouseId ? (
-                    <HouseDetail
-                        houseId={selectedHouseId}
-                        onClose={() => setSelectedHouseId(null)}
-                    />
-                ) : (
-                    <HouseListStats />
-                )
-            }
+            insideSheetContent={insideSheetContent}
             title="Rumah"
         >
-            <HouseListDataTable onSelectHouse={setSelectedHouseId} />
+            <HouseListDataTable
+                onAddClick={() => setPanel('create')}
+                onSelectHouse={(id) => setPanel({ id, type: 'detail' })}
+            />
         </PageWrapper>
     );
 };
