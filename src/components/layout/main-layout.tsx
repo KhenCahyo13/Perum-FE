@@ -3,8 +3,10 @@ import { Outlet } from '@tanstack/react-router';
 import { Navbar } from './navbar';
 
 export const MainLayout = () => (
-    <main className="min-h-screen bg-muted">
+    <div className="flex h-screen flex-col overflow-hidden bg-muted">
         <Navbar />
-        <Outlet />
-    </main>
+        <div className="flex flex-1 overflow-hidden">
+            <Outlet />
+        </div>
+    </div>
 );

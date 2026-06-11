@@ -19,6 +19,7 @@ import {
     NavigationMenuLink,
     NavigationMenuList,
 } from '../ui/navigation-menu';
+import { Logo } from './logo';
 
 export const navItems = [
     {
@@ -27,7 +28,7 @@ export const navItems = [
         label: 'Dashboard',
     },
     {
-        href: '/home',
+        href: '/house',
         icon: IconHome2,
         label: 'Rumah',
     },
@@ -41,7 +42,7 @@ export const navItems = [
 export const Navbar = () => (
     <header>
         <nav className="flex items-center justify-between border-b border-border bg-white px-8 py-3">
-            <h1 className="font-medium">Perum App</h1>
+            <Logo />
             <NavigationMenu>
                 <NavigationMenuList className="gap-x-3">
                     {navItems.map((nav) => (

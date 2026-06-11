@@ -14,8 +14,8 @@ import { Route as rootRouteImport } from './routes/__root';
 import { Route as authenticatedRouteRouteImport } from './routes/(authenticated)/route';
 
 const AuthLoginLazyRouteImport = createFileRoute('/auth/login')();
-const authenticatedHomeIndexLazyRouteImport = createFileRoute(
-    '/(authenticated)/home/'
+const authenticatedHouseIndexLazyRouteImport = createFileRoute(
+    '/(authenticated)/house/'
 )();
 const authenticatedDashboardIndexLazyRouteImport = createFileRoute(
     '/(authenticated)/dashboard/'
@@ -30,14 +30,14 @@ const AuthLoginLazyRoute = AuthLoginLazyRouteImport.update({
     path: '/auth/login',
     getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/auth/login.lazy').then((d) => d.Route));
-const authenticatedHomeIndexLazyRoute = authenticatedHomeIndexLazyRouteImport
+const authenticatedHouseIndexLazyRoute = authenticatedHouseIndexLazyRouteImport
     .update({
-        id: '/home/',
-        path: '/home/',
+        id: '/house/',
+        path: '/house/',
         getParentRoute: () => authenticatedRouteRoute,
     } as any)
     .lazy(() =>
-        import('./routes/(authenticated)/home/index.lazy').then((d) => d.Route)
+        import('./routes/(authenticated)/house/index.lazy').then((d) => d.Route)
     );
 const authenticatedDashboardIndexLazyRoute =
     authenticatedDashboardIndexLazyRouteImport
@@ -55,31 +55,31 @@ const authenticatedDashboardIndexLazyRoute =
 export interface FileRoutesByFullPath {
     '/auth/login': typeof AuthLoginLazyRoute;
     '/dashboard/': typeof authenticatedDashboardIndexLazyRoute;
-    '/home/': typeof authenticatedHomeIndexLazyRoute;
+    '/house/': typeof authenticatedHouseIndexLazyRoute;
 }
 export interface FileRoutesByTo {
     '/auth/login': typeof AuthLoginLazyRoute;
     '/dashboard': typeof authenticatedDashboardIndexLazyRoute;
-    '/home': typeof authenticatedHomeIndexLazyRoute;
+    '/house': typeof authenticatedHouseIndexLazyRoute;
 }
 export interface FileRoutesById {
     __root__: typeof rootRouteImport;
     '/(authenticated)': typeof authenticatedRouteRouteWithChildren;
     '/auth/login': typeof AuthLoginLazyRoute;
     '/(authenticated)/dashboard/': typeof authenticatedDashboardIndexLazyRoute;
-    '/(authenticated)/home/': typeof authenticatedHomeIndexLazyRoute;
+    '/(authenticated)/house/': typeof authenticatedHouseIndexLazyRoute;
 }
 export interface FileRouteTypes {
     fileRoutesByFullPath: FileRoutesByFullPath;
-    fullPaths: '/auth/login' | '/dashboard/' | '/home/';
+    fullPaths: '/auth/login' | '/dashboard/' | '/house/';
     fileRoutesByTo: FileRoutesByTo;
-    to: '/auth/login' | '/dashboard' | '/home';
+    to: '/auth/login' | '/dashboard' | '/house';
     id:
         | '__root__'
         | '/(authenticated)'
         | '/auth/login'
         | '/(authenticated)/dashboard/'
-        | '/(authenticated)/home/';
+        | '/(authenticated)/house/';
     fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
@@ -103,11 +103,11 @@ declare module '@tanstack/react-router' {
             preLoaderRoute: typeof AuthLoginLazyRouteImport;
             parentRoute: typeof rootRouteImport;
         };
-        '/(authenticated)/home/': {
-            id: '/(authenticated)/home/';
-            path: '/home';
-            fullPath: '/home/';
-            preLoaderRoute: typeof authenticatedHomeIndexLazyRouteImport;
+        '/(authenticated)/house/': {
+            id: '/(authenticated)/house/';
+            path: '/house';
+            fullPath: '/house/';
+            preLoaderRoute: typeof authenticatedHouseIndexLazyRouteImport;
             parentRoute: typeof authenticatedRouteRoute;
         };
         '/(authenticated)/dashboard/': {
@@ -122,12 +122,12 @@ declare module '@tanstack/react-router' {
 
 interface authenticatedRouteRouteChildren {
     authenticatedDashboardIndexLazyRoute: typeof authenticatedDashboardIndexLazyRoute;
-    authenticatedHomeIndexLazyRoute: typeof authenticatedHomeIndexLazyRoute;
+    authenticatedHouseIndexLazyRoute: typeof authenticatedHouseIndexLazyRoute;
 }
 
 const authenticatedRouteRouteChildren: authenticatedRouteRouteChildren = {
     authenticatedDashboardIndexLazyRoute: authenticatedDashboardIndexLazyRoute,
-    authenticatedHomeIndexLazyRoute: authenticatedHomeIndexLazyRoute,
+    authenticatedHouseIndexLazyRoute: authenticatedHouseIndexLazyRoute,
 };
 
 const authenticatedRouteRouteWithChildren =

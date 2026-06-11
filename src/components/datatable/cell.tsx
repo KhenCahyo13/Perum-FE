@@ -8,7 +8,7 @@ interface TtTableCellProps {
 }
 
 function DataTableCellBase({ children, className }: TtTableCellProps) {
-    return <div className={cn('py-1', className)}>{children}</div>;
+    return <div className={cn('py-2', className)}>{children}</div>;
 }
 
 export const DataTableCell = memo(

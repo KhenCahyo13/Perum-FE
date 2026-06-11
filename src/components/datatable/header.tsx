@@ -1,121 +1,90 @@
-import { IconPlus, IconSearch } from '@tabler/icons-react';
+import { IconPlus } from '@tabler/icons-react';
 import { Link } from '@tanstack/react-router';
 import { memo, type ReactNode, useEffect, useState } from 'react';
-import { useDebounce } from 'use-debounce';
-
-import { cn } from '@/lib/utils';
 
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from '../ui/select';
 import { useDataTableContext } from './context';
 
 interface DataTableHeaderProps {
     addAsLink?: string;
+    addButtonLabel?: string;
     customSearch?: string;
     customSetSearch?: (value: string) => void;
     filtersContent?: ReactNode;
     onAddClick?: () => void;
+    rightContent?: ReactNode;
     searchPlaceholder?: string;
-    subtitle: string;
-    title: string;
+    subtitle?: string;
+    title?: string;
 }
 
 function DataTableHeaderBase({
     addAsLink,
+    addButtonLabel = 'Add New',
     customSearch,
     customSetSearch,
     filtersContent,
     onAddClick,
+    rightContent,
     searchPlaceholder = 'Cari data...',
     subtitle,
     title,
 }: DataTableHeaderProps) {
-    const limit = useDataTableContext((s) => s.limit);
     const search = useDataTableContext((s) => s.search);
-    const setLimit = useDataTableContext((s) => s.setLimit);
     const setSearch = useDataTableContext((s) => s.setSearch);
+    const setPage = useDataTableContext((s) => s.setPage);
 
     const [inputValue, setInputValue] = useState(customSearch ?? search);
-    const [debouncedValue] = useDebounce(inputValue, 300);
 
     useEffect(() => {
-        const setter = customSetSearch ?? setSearch;
-        setter(debouncedValue);
-    }, [debouncedValue, customSetSearch, setSearch]);
+        const timer = setTimeout(() => {
+            const setter = customSetSearch ?? setSearch;
+            setter(inputValue);
+            setPage(1);
+        }, 300);
+
+        return () => clearTimeout(timer);
+    }, [inputValue, customSetSearch, setSearch, setPage]);
 
     return (
-        <div className="flex flex-col gap-y-4">
-            <div className="flex items-center justify-between">
-                <div className="flex flex-col gap-y-1.5">
-                    <h2 className="text-base font-medium">{title}</h2>
-                    <p className="text-sm text-muted-foreground">{subtitle}</p>
-                </div>
-                {onAddClick ? (
-                    <Button onClick={onAddClick}>
-                        <IconPlus />
-                        <span className="hidden md:block">Create New</span>
-                    </Button>
-                ) : addAsLink ? (
-                    <Button asChild>
-                        <Link to={addAsLink}>
-                            <IconPlus />
-                            <span className="hidden md:block">Create New</span>
-                        </Link>
-                    </Button>
-                ) : null}
-            </div>
-            <div className="flex items-center justify-between">
-                <div
-                    className={cn(
-                        'flex items-center rounded-full border bg-muted',
-                        'focus-within:ring-2 focus-within:ring-ring'
+        <div className="flex flex-col gap-4 px-6">
+            {(title || subtitle) && (
+                <div className="flex flex-col gap-y-0.5">
+                    {title && <h2 className="font-semibold">{title}</h2>}
+                    {subtitle && (
+                        <p className="text-sm text-muted-foreground">
+                            {subtitle}
+                        </p>
                     )}
-                >
-                    <span className="flex items-center pl-3 text-muted-foreground">
-                        <IconSearch className="size-4.5" />
-                    </span>
-
-                    <Input
-                        className="rounded-full border-0 bg-muted shadow-none focus-visible:ring-0 lg:w-72"
-                        onChange={(e) => {
-                            const value = e.target.value;
-                            setInputValue(value);
-                            if (!value) {
-                                (customSetSearch ?? setSearch)(value);
-                            }
-                        }}
-                        placeholder={searchPlaceholder}
-                        type="text"
-                        value={inputValue}
-                    />
                 </div>
+            )}
+
+            <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                <Input
+                    className="w-full bg-muted/50 shadow-none md:w-sm"
+                    onChange={(e) => setInputValue(e.target.value)}
+                    placeholder={searchPlaceholder}
+                    type="text"
+                    value={inputValue}
+                />
+
                 <div className="flex items-center gap-x-2">
-                    <Select
-                        onValueChange={(value) => setLimit(Number(value))}
-                        value={limit.toString()}
-                    >
-                        <SelectTrigger className="w-fit rounded-full bg-muted">
-                            <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                            {[10, 20, 30, 40, 50].map((value) => (
-                                <SelectItem
-                                    key={value}
-                                    value={value.toString()}
-                                >
-                                    {value}
-                                </SelectItem>
-                            ))}
-                        </SelectContent>
-                    </Select>
                     {filtersContent}
+                    {rightContent}
+                    {onAddClick ? (
+                        <Button className="" onClick={onAddClick}>
+                            <IconPlus />
+                            {addButtonLabel}
+                        </Button>
+                    ) : addAsLink ? (
+                        <Button asChild className="">
+                            <Link to={addAsLink}>
+                                <IconPlus />
+                                {addButtonLabel}
+                            </Link>
+                        </Button>
+                    ) : null}
                 </div>
             </div>
         </div>

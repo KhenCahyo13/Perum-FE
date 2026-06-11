@@ -32,9 +32,9 @@ function DataTableFilterDialogBase({
     return (
         <Dialog onOpenChange={onOpenChange} open={open}>
             <Button
-                className="relative bg-muted"
+                className="relative"
                 onClick={() => onOpenChange(true)}
-                size="icon"
+                size="icon-lg"
                 variant="outline"
             >
                 <IconFilter />

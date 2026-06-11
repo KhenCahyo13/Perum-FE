@@ -109,7 +109,7 @@ function RhTextInputBase<
                             {...field}
                             {...inputProps}
                             aria-invalid={fieldState.invalid}
-                            className="border-0 shadow-none focus-visible:ring-0"
+                            className="border-0 bg-muted/50 focus-visible:ring-0"
                             id={field.name}
                             onChange={
                                 isCurrency
