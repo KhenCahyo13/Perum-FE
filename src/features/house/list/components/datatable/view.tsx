@@ -1,0 +1,42 @@
+import type { Row } from '@tanstack/react-table';
+
+import {
+    DataTable,
+    DataTableBody,
+    DataTableHeader,
+    DataTablePagination,
+} from '@/components/datatable';
+import type { HouseList } from '@/types/house';
+
+import type { HouseListDataTableViewProps } from './types';
+
+const HouseListDataTableView = ({
+    filtersContent,
+    isError,
+    isLoading,
+    onAddClick,
+    onRowClick,
+    pagination,
+    refetch,
+    table,
+}: HouseListDataTableViewProps) => (
+    <DataTable>
+        <DataTableHeader
+            addButtonLabel="Tambah Rumah"
+            filtersContent={filtersContent}
+            onAddClick={onAddClick}
+            searchPlaceholder="Cari nomor rumah atau alamat..."
+        />
+        <DataTableBody
+            fallbackMessage="Tidak ada data rumah."
+            isError={isError}
+            isLoading={isLoading}
+            onRowClick={(row: Row<HouseList>) => onRowClick(row.original.id)}
+            refetchData={refetch}
+            table={table}
+        />
+        <DataTablePagination pagination={pagination} />
+    </DataTable>
+);
+
+export default HouseListDataTableView;
