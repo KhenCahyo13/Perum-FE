@@ -3,8 +3,11 @@ import {
     IconHome2,
     IconLayoutGrid,
     IconLogout,
+    IconMoneybag,
     IconUsers,
 } from '@tabler/icons-react';
+
+import { useAuthStore } from '@/stores/auth-store';
 
 import { Avatar, AvatarFallback } from '../ui/avatar';
 import { Button } from '../ui/button';
@@ -43,39 +46,50 @@ export const navItems = [
         icon: IconFileInvoice,
         label: 'Tagihan',
     },
+    {
+        href: '/expense',
+        icon: IconMoneybag,
+        label: 'Pengeluaran',
+    },
 ];
 
-export const Navbar = () => (
-    <header>
-        <nav className="flex items-center justify-between border-b border-border bg-white px-8 py-3">
-            <Logo />
-            <NavigationMenu>
-                <NavigationMenuList className="gap-x-3">
-                    {navItems.map((nav) => (
-                        <NavigationMenuItem key={nav.label}>
-                            <NavigationMenuLink href={nav.href}>
-                                <nav.icon className="mr-2" />
-                                {nav.label}
-                            </NavigationMenuLink>
-                        </NavigationMenuItem>
-                    ))}
-                </NavigationMenuList>
-            </NavigationMenu>
-            <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                    <Button className="h-11 rounded-full" variant="outline">
-                        <Avatar>
-                            <AvatarFallback>KH</AvatarFallback>
-                        </Avatar>
-                        Khen Cahyo
-                    </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="center" className="min-w-44">
-                    <DropdownMenuItem className="text-destructive">
-                        <IconLogout /> Logout
-                    </DropdownMenuItem>
-                </DropdownMenuContent>
-            </DropdownMenu>
-        </nav>
-    </header>
-);
+export const Navbar = () => {
+    const { user } = useAuthStore();
+
+    return (
+        <header>
+            <nav className="flex items-center justify-between border-b border-border bg-white px-8 py-3">
+                <Logo />
+                <NavigationMenu>
+                    <NavigationMenuList className="gap-x-3">
+                        {navItems.map((nav) => (
+                            <NavigationMenuItem key={nav.label}>
+                                <NavigationMenuLink href={nav.href}>
+                                    <nav.icon className="mr-2" />
+                                    {nav.label}
+                                </NavigationMenuLink>
+                            </NavigationMenuItem>
+                        ))}
+                    </NavigationMenuList>
+                </NavigationMenu>
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button className="h-11 rounded-full" variant="outline">
+                            <Avatar>
+                                <AvatarFallback>
+                                    {user?.name?.charAt(0)}
+                                </AvatarFallback>
+                            </Avatar>
+                            {user?.name}
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="center" className="min-w-44">
+                        <DropdownMenuItem className="text-destructive">
+                            <IconLogout /> Logout
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+            </nav>
+        </header>
+    );
+};

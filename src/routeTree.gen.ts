@@ -20,6 +20,9 @@ const authenticatedResidentIndexLazyRouteImport = createFileRoute(
 const authenticatedHouseIndexLazyRouteImport = createFileRoute(
     '/(authenticated)/house/'
 )();
+const authenticatedExpenseIndexLazyRouteImport = createFileRoute(
+    '/(authenticated)/expense/'
+)();
 const authenticatedDashboardIndexLazyRouteImport = createFileRoute(
     '/(authenticated)/dashboard/'
 )();
@@ -57,6 +60,18 @@ const authenticatedHouseIndexLazyRoute = authenticatedHouseIndexLazyRouteImport
     .lazy(() =>
         import('./routes/(authenticated)/house/index.lazy').then((d) => d.Route)
     );
+const authenticatedExpenseIndexLazyRoute =
+    authenticatedExpenseIndexLazyRouteImport
+        .update({
+            id: '/expense/',
+            path: '/expense/',
+            getParentRoute: () => authenticatedRouteRoute,
+        } as any)
+        .lazy(() =>
+            import('./routes/(authenticated)/expense/index.lazy').then(
+                (d) => d.Route
+            )
+        );
 const authenticatedDashboardIndexLazyRoute =
     authenticatedDashboardIndexLazyRouteImport
         .update({
@@ -83,6 +98,7 @@ export interface FileRoutesByFullPath {
     '/auth/login': typeof AuthLoginLazyRoute;
     '/bill/': typeof authenticatedBillIndexLazyRoute;
     '/dashboard/': typeof authenticatedDashboardIndexLazyRoute;
+    '/expense/': typeof authenticatedExpenseIndexLazyRoute;
     '/house/': typeof authenticatedHouseIndexLazyRoute;
     '/resident/': typeof authenticatedResidentIndexLazyRoute;
 }
@@ -90,6 +106,7 @@ export interface FileRoutesByTo {
     '/auth/login': typeof AuthLoginLazyRoute;
     '/bill': typeof authenticatedBillIndexLazyRoute;
     '/dashboard': typeof authenticatedDashboardIndexLazyRoute;
+    '/expense': typeof authenticatedExpenseIndexLazyRoute;
     '/house': typeof authenticatedHouseIndexLazyRoute;
     '/resident': typeof authenticatedResidentIndexLazyRoute;
 }
@@ -99,6 +116,7 @@ export interface FileRoutesById {
     '/auth/login': typeof AuthLoginLazyRoute;
     '/(authenticated)/bill/': typeof authenticatedBillIndexLazyRoute;
     '/(authenticated)/dashboard/': typeof authenticatedDashboardIndexLazyRoute;
+    '/(authenticated)/expense/': typeof authenticatedExpenseIndexLazyRoute;
     '/(authenticated)/house/': typeof authenticatedHouseIndexLazyRoute;
     '/(authenticated)/resident/': typeof authenticatedResidentIndexLazyRoute;
 }
@@ -108,16 +126,24 @@ export interface FileRouteTypes {
         | '/auth/login'
         | '/bill/'
         | '/dashboard/'
+        | '/expense/'
         | '/house/'
         | '/resident/';
     fileRoutesByTo: FileRoutesByTo;
-    to: '/auth/login' | '/bill' | '/dashboard' | '/house' | '/resident';
+    to:
+        | '/auth/login'
+        | '/bill'
+        | '/dashboard'
+        | '/expense'
+        | '/house'
+        | '/resident';
     id:
         | '__root__'
         | '/(authenticated)'
         | '/auth/login'
         | '/(authenticated)/bill/'
         | '/(authenticated)/dashboard/'
+        | '/(authenticated)/expense/'
         | '/(authenticated)/house/'
         | '/(authenticated)/resident/';
     fileRoutesById: FileRoutesById;
@@ -157,6 +183,13 @@ declare module '@tanstack/react-router' {
             preLoaderRoute: typeof authenticatedHouseIndexLazyRouteImport;
             parentRoute: typeof authenticatedRouteRoute;
         };
+        '/(authenticated)/expense/': {
+            id: '/(authenticated)/expense/';
+            path: '/expense';
+            fullPath: '/expense/';
+            preLoaderRoute: typeof authenticatedExpenseIndexLazyRouteImport;
+            parentRoute: typeof authenticatedRouteRoute;
+        };
         '/(authenticated)/dashboard/': {
             id: '/(authenticated)/dashboard/';
             path: '/dashboard';
@@ -177,6 +210,7 @@ declare module '@tanstack/react-router' {
 interface authenticatedRouteRouteChildren {
     authenticatedBillIndexLazyRoute: typeof authenticatedBillIndexLazyRoute;
     authenticatedDashboardIndexLazyRoute: typeof authenticatedDashboardIndexLazyRoute;
+    authenticatedExpenseIndexLazyRoute: typeof authenticatedExpenseIndexLazyRoute;
     authenticatedHouseIndexLazyRoute: typeof authenticatedHouseIndexLazyRoute;
     authenticatedResidentIndexLazyRoute: typeof authenticatedResidentIndexLazyRoute;
 }
@@ -184,6 +218,7 @@ interface authenticatedRouteRouteChildren {
 const authenticatedRouteRouteChildren: authenticatedRouteRouteChildren = {
     authenticatedBillIndexLazyRoute: authenticatedBillIndexLazyRoute,
     authenticatedDashboardIndexLazyRoute: authenticatedDashboardIndexLazyRoute,
+    authenticatedExpenseIndexLazyRoute: authenticatedExpenseIndexLazyRoute,
     authenticatedHouseIndexLazyRoute: authenticatedHouseIndexLazyRoute,
     authenticatedResidentIndexLazyRoute: authenticatedResidentIndexLazyRoute,
 };

@@ -1,5 +1,6 @@
 import {
     IconBuilding,
+    IconCalendar,
     IconHash,
     IconHomeCancel,
     IconMapPin,
@@ -58,10 +59,12 @@ const HouseDetailView = ({
                     </Button>
                 </div>
                 <div className="flex items-center gap-x-2">
-                    <Button variant="outline">
-                        Isi Penghuni
-                        <IconUser />
-                    </Button>
+                    {house?.status !== 'Dihuni' && (
+                        <Button variant="outline">
+                            Isi Penghuni
+                            <IconUser />
+                        </Button>
+                    )}
                     <Button onClick={onEdit}>
                         Edit Rumah
                         <IconPencil />
@@ -145,6 +148,58 @@ const HouseDetailView = ({
                     </SectionWrapper>
                 ) : (
                     <BoxTextFallback label="Rumah ini tidak memiliki penghuni saat ini" />
+                )}
+
+                {house.history && house.history.length > 0 && (
+                    <SectionWrapper>
+                        <p className="text-sm font-medium text-muted-foreground">
+                            Riwayat Penghuni
+                        </p>
+                        <div className="mt-4 flex flex-col divide-y divide-border">
+                            {house.history.map((h) => (
+                                <div
+                                    className="flex flex-col gap-y-3 py-4 first:pt-0 last:pb-0"
+                                    key={h.id}
+                                >
+                                    <DataPreview
+                                        icon={IconUser}
+                                        title="Nama"
+                                        titlePosition="top"
+                                        value={h.residentName}
+                                    />
+                                    <div className="grid gap-3 md:grid-cols-2">
+                                        <DataPreview
+                                            icon={IconCalendar}
+                                            title="Mulai"
+                                            titlePosition="top"
+                                            value={h.startDate}
+                                        />
+                                        <DataPreview
+                                            icon={IconCalendar}
+                                            title="Selesai"
+                                            titlePosition="top"
+                                            value={
+                                                h.isActive
+                                                    ? 'Sekarang'
+                                                    : h.endDate
+                                            }
+                                            valueClassName={
+                                                h.isActive
+                                                    ? 'text-green-600'
+                                                    : undefined
+                                            }
+                                        />
+                                    </div>
+                                    <DataPreview
+                                        icon={IconPhone}
+                                        title="No. Telepon"
+                                        titlePosition="top"
+                                        value={h.residentPhoneNumber}
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    </SectionWrapper>
                 )}
             </div>
         )}
