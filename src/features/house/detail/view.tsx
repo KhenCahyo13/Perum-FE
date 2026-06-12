@@ -25,9 +25,11 @@ import type { HouseDetailViewProps } from './types';
 
 const HouseDetailView = ({
     house,
+    isDeletingHouse,
     isError,
     isLoading,
     onClose,
+    onDelete,
     onEdit,
 }: HouseDetailViewProps) => (
     <InsideSheetWrapper
@@ -36,6 +38,8 @@ const HouseDetailView = ({
                 <div className="flex items-center gap-x-2">
                     <Button
                         className="border-destructive text-destructive hover:bg-destructive hover:text-white"
+                        disabled={isDeletingHouse}
+                        onClick={onDelete}
                         size="icon-lg"
                         variant="outline"
                     >

@@ -24,6 +24,7 @@ const HouseListView = () => {
             <HouseDetail
                 houseId={panel.id}
                 onClose={() => setPanel('stats')}
+                onDelete={() => setPanel('stats')}
                 onEdit={() => setPanel({ id: panel.id, type: 'update' })}
             />
         ) : typeof panel === 'object' && panel.type === 'update' ? (

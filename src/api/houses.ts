@@ -59,3 +59,7 @@ export const updateHouse = async (
 
     return data as ApiResponse<HouseList>;
 };
+
+export const deleteHouse = async (id: string): Promise<void> => {
+    await authenticatedApi.delete(`${HOUSE_API_URL}/${id}`);
+};
