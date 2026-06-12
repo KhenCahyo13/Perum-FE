@@ -1,4 +1,4 @@
-import type { ElementType, FC } from 'react';
+import type { ElementType } from 'react';
 import { memo } from 'react';
 
 import { cn } from '@/lib/utils';
@@ -10,12 +10,12 @@ interface BoxPreviewProps {
     valueClassName?: string;
 }
 
-const BoxPreviewBase: FC<BoxPreviewProps> = ({
+const BoxPreviewBase = ({
     icon: Icon,
     title,
     value,
     valueClassName,
-}) => (
+}: BoxPreviewProps) => (
     <div className="rounded-lg border p-4">
         <div className="flex gap-x-3">
             <Icon className="size-5 text-muted-foreground" />

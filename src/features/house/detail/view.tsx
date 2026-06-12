@@ -9,7 +9,7 @@ import {
     IconUser,
     IconUsers,
 } from '@tabler/icons-react';
-import type { FC, memo } from 'react';
+import { memo } from 'react';
 
 import { BoxPreview, DataPreview } from '@/components/data';
 import {
@@ -23,12 +23,12 @@ import { Button } from '@/components/ui/button';
 
 import type { HouseDetailViewProps } from './types';
 
-const HouseDetailView: FC<HouseDetailViewProps> = ({
+const HouseDetailView = ({
     house,
     isError,
     isLoading,
     onClose,
-}) => (
+}: HouseDetailViewProps) => (
     <InsideSheetWrapper
         footer={
             <div className="flex items-center justify-between">

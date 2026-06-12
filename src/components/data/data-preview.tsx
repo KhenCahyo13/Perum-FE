@@ -1,4 +1,4 @@
-import type { ElementType, FC, ReactNode } from 'react';
+import type { ElementType, ReactNode } from 'react';
 import { memo } from 'react';
 
 import { cn } from '@/lib/utils';
@@ -13,7 +13,7 @@ interface DataPreviewProps {
     valueClassName?: string;
 }
 
-const DataPreviewBase: FC<DataPreviewProps> = ({
+const DataPreviewBase = ({
     className,
     icon: Icon,
     iconClassName,
@@ -21,7 +21,7 @@ const DataPreviewBase: FC<DataPreviewProps> = ({
     titlePosition = 'bottom',
     value,
     valueClassName,
-}) => (
+}: DataPreviewProps) => (
     <div className={cn('flex gap-x-3', className)}>
         {Icon && (
             <Icon

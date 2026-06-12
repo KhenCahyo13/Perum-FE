@@ -3,7 +3,6 @@ import {
     IconDoorEnter,
     IconDoorOff,
 } from '@tabler/icons-react';
-import type { FC } from 'react';
 
 import { StatsCard } from '@/components/data';
 import { ImageFallback, LoaderFallback } from '@/components/fallback';
@@ -11,11 +10,11 @@ import { InsideSheetWrapper } from '@/components/layout';
 
 import type { HouseListStatsViewProps } from './types';
 
-const HouseListStatsView: FC<HouseListStatsViewProps> = ({
+const HouseListStatsView = ({
     isErrorStats,
     isLoadingStats,
     stats,
-}) => (
+}: HouseListStatsViewProps) => (
     <InsideSheetWrapper
         subtitle="Laporan singkat mengenai data rumah Anda"
         title="Laporan Rumah"

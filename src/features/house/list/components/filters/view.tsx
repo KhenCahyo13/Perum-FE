@@ -1,4 +1,4 @@
-import { type FC, memo } from 'react';
+import { memo } from 'react';
 
 import {
     DataTableFilterDialog,
@@ -8,7 +8,7 @@ import {
 import { statusOptions } from './data';
 import type { HouseListFiltersViewProps } from './types';
 
-const HouseListFiltersView: FC<HouseListFiltersViewProps> = ({
+const HouseListFiltersView = ({
     activeCount,
     onApply,
     onOpenChange,
@@ -16,7 +16,7 @@ const HouseListFiltersView: FC<HouseListFiltersViewProps> = ({
     onStatusChange,
     open,
     pending,
-}) => (
+}: HouseListFiltersViewProps) => (
     <DataTableFilterDialog
         activeCount={activeCount}
         onApply={onApply}

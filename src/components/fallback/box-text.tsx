@@ -1,11 +1,10 @@
-import type { FC } from 'react';
 import { memo } from 'react';
 
 interface BoxTextFallbackProps {
     label: string;
 }
 
-const BoxTextFallbackBase: FC<BoxTextFallbackProps> = ({ label }) => (
+const BoxTextFallbackBase = ({ label }: BoxTextFallbackProps) => (
     <div className="rounded-lg border border-dashed p-4 text-center">
         <p className="text-[13px] text-muted-foreground">{label}</p>
     </div>

@@ -1,5 +1,4 @@
 import type { Row } from '@tanstack/react-table';
-import type { FC } from 'react';
 
 import {
     DataTable,
@@ -11,7 +10,7 @@ import type { HouseList } from '@/types/house';
 
 import type { HouseListDataTableViewProps } from './types';
 
-const HouseListDataTableView: FC<HouseListDataTableViewProps> = ({
+const HouseListDataTableView = ({
     filtersContent,
     isError,
     isLoading,
@@ -20,7 +19,7 @@ const HouseListDataTableView: FC<HouseListDataTableViewProps> = ({
     pagination,
     refetch,
     table,
-}) => (
+}: HouseListDataTableViewProps) => (
     <DataTable>
         <DataTableHeader
             addButtonLabel="Tambah Rumah"

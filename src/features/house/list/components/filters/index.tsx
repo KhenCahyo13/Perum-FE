@@ -1,4 +1,4 @@
-import { type FC, memo, useCallback, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 
 import { useDataTableContext } from '@/components/datatable';
 import type { HouseStatusType } from '@/types/house';
@@ -6,10 +6,10 @@ import type { HouseStatusType } from '@/types/house';
 import type { HouseListFiltersProps, HouseListFiltersValue } from './types';
 import HouseListFiltersView from './view';
 
-const HouseListFilters: FC<HouseListFiltersProps> = ({
+const HouseListFilters = ({
     currentFilters,
     onApply,
-}) => {
+}: HouseListFiltersProps) => {
     const activeCount = useDataTableContext((s) => s.filters.length);
     const [open, setOpen] = useState(false);
     const [pending, setPending] =
