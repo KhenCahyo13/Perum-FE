@@ -63,3 +63,7 @@ export const updateHouse = async (
 export const deleteHouse = async (id: string): Promise<void> => {
     await authenticatedApi.delete(`${HOUSE_API_URL}/${id}`);
 };
+
+export const removeResident = async (id: string): Promise<void> => {
+    await authenticatedApi.delete(`${HOUSE_API_URL}/${id}/remove-resident`);
+};

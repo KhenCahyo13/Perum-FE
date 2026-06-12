@@ -12,7 +12,9 @@ export interface HouseDetailViewProps {
     isDeletingHouse: boolean;
     isError: boolean;
     isLoading: boolean;
+    isRemovingResident: boolean;
     onClose: () => void;
     onDelete: () => void;
     onEdit: () => void;
+    onRemoveResident: () => void;
 }

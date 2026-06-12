@@ -28,9 +28,11 @@ const HouseDetailView = ({
     isDeletingHouse,
     isError,
     isLoading,
+    isRemovingResident,
     onClose,
     onDelete,
     onEdit,
+    onRemoveResident,
 }: HouseDetailViewProps) => (
     <InsideSheetWrapper
         footer={
@@ -47,6 +49,8 @@ const HouseDetailView = ({
                     </Button>
                     <Button
                         className="border-destructive text-destructive hover:bg-destructive hover:text-white"
+                        disabled={isRemovingResident}
+                        onClick={onRemoveResident}
                         size="icon-lg"
                         variant="outline"
                     >
