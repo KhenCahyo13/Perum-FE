@@ -22,24 +22,24 @@ const DataPreviewBase = ({
     value,
     valueClassName,
 }: DataPreviewProps) => (
-    <div className={cn('flex gap-x-3', className)}>
+    <div className={cn('flex gap-x-4', className)}>
         {Icon && (
             <Icon
                 className={cn(
-                    'size-5.5 shrink-0 text-muted-foreground',
+                    'size-5 shrink-0 text-muted-foreground',
                     iconClassName
                 )}
             />
         )}
-        <div className="flex flex-col gap-y-0.5">
+        <div className="flex flex-col gap-y-1">
             {titlePosition === 'top' && (
-                <p className="text-[13px] text-muted-foreground">{title}</p>
+                <p className="text-sm text-muted-foreground">{title}</p>
             )}
-            <p className={cn('text-[13px] font-medium', valueClassName)}>
+            <p className={cn('text-sm font-medium', valueClassName)}>
                 {value}
             </p>
             {titlePosition === 'bottom' && (
-                <p className="text-[13px] text-muted-foreground">{title}</p>
+                <p className="text-sm text-muted-foreground">{title}</p>
             )}
         </div>
     </div>

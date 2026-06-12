@@ -19,9 +19,9 @@ const BoxPreviewBase = ({
     <div className="rounded-lg border p-4">
         <div className="flex gap-x-3">
             <Icon className="size-5 text-muted-foreground" />
-            <div className="flex flex-col gap-y-0.5">
-                <p className="text-xs text-muted-foreground">{title}</p>
-                <p className={cn('text-[13px] font-medium', valueClassName)}>
+            <div className="flex flex-col gap-y-1">
+                <p className="text-[13px] text-muted-foreground">{title}</p>
+                <p className={cn('text-sm font-medium', valueClassName)}>
                     {value}
                 </p>
             </div>

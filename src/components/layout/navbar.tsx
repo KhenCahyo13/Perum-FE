@@ -33,7 +33,7 @@ export const navItems = [
         label: 'Rumah',
     },
     {
-        href: '/dashboard',
+        href: '/resident',
         icon: IconUsers,
         label: 'Penghuni',
     },

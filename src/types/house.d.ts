@@ -1,5 +1,6 @@
+import type { ResidentType } from './resident';
+
 export type HouseStatusType = 'Dihuni' | 'Kosong';
-export type HouseResidentType = 'Kontrak' | 'Tetap';
 
 export interface HouseList {
     address: string;
@@ -19,7 +20,7 @@ export interface HouseCurrentResident {
     isMarried: boolean;
     ktpFileUrl: string;
     phoneNumber: string;
-    residentType: HouseResidentType;
+    residentType: ResidentType;
 }
 
 export interface HouseHistory {
