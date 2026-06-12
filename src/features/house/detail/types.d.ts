@@ -3,6 +3,7 @@ import type { HouseDetail } from '@/types/house';
 export interface HouseDetailProps {
     houseId: string;
     onClose: () => void;
+    onEdit: () => void;
 }
 
 export interface HouseDetailViewProps {
@@ -10,4 +11,5 @@ export interface HouseDetailViewProps {
     isError: boolean;
     isLoading: boolean;
     onClose: () => void;
+    onEdit: () => void;
 }

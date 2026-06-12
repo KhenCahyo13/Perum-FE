@@ -1,4 +1,5 @@
 import type { CreateHouseFormValues } from '@/features/house/create/types';
+import type { UpdateHouseFormValues } from '@/features/house/update/types';
 import { authenticatedApi } from '@/lib/axios';
 import type { ApiPagination, ApiResponse } from '@/types/api';
 import type {
@@ -43,6 +44,18 @@ export const createHouse = async (
     payload: CreateHouseFormValues
 ): Promise<ApiResponse<HouseList>> => {
     const { data } = await authenticatedApi.post(HOUSE_API_URL, payload);
+
+    return data as ApiResponse<HouseList>;
+};
+
+export const updateHouse = async (
+    id: string,
+    payload: UpdateHouseFormValues
+): Promise<ApiResponse<HouseList>> => {
+    const { data } = await authenticatedApi.patch(
+        `${HOUSE_API_URL}/${id}`,
+        payload
+    );
 
     return data as ApiResponse<HouseList>;
 };

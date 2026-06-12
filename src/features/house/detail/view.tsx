@@ -28,6 +28,7 @@ const HouseDetailView = ({
     isError,
     isLoading,
     onClose,
+    onEdit,
 }: HouseDetailViewProps) => (
     <InsideSheetWrapper
         footer={
@@ -53,7 +54,7 @@ const HouseDetailView = ({
                         Isi Penghuni
                         <IconUser />
                     </Button>
-                    <Button>
+                    <Button onClick={onEdit}>
                         Edit Rumah
                         <IconPencil />
                     </Button>

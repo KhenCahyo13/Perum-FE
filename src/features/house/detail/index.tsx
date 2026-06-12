@@ -6,7 +6,7 @@ import { queryKeys } from '@/lib/query-keys';
 import type { HouseDetailProps } from './types';
 import HouseDetailView from './view';
 
-const HouseDetail = ({ houseId, onClose }: HouseDetailProps) => {
+const HouseDetail = ({ houseId, onClose, onEdit }: HouseDetailProps) => {
     const { data, isError, isLoading } = useQuery({
         queryFn: () => fetchHouseById(houseId),
         queryKey: queryKeys.houses.detail(houseId),
@@ -18,6 +18,7 @@ const HouseDetail = ({ houseId, onClose }: HouseDetailProps) => {
             isError={isError}
             isLoading={isLoading}
             onClose={onClose}
+            onEdit={onEdit}
         />
     );
 };
