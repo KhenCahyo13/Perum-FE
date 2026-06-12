@@ -1,4 +1,5 @@
 import {
+    IconFileInvoice,
     IconHome2,
     IconLayoutGrid,
     IconLogout,
@@ -36,6 +37,11 @@ export const navItems = [
         href: '/resident',
         icon: IconUsers,
         label: 'Penghuni',
+    },
+    {
+        href: '/bill',
+        icon: IconFileInvoice,
+        label: 'Tagihan',
     },
 ];
 

@@ -8,163 +8,193 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router';
 
-import { Route as rootRouteImport } from './routes/__root'
-import { Route as authenticatedRouteRouteImport } from './routes/(authenticated)/route'
+import { Route as rootRouteImport } from './routes/__root';
+import { Route as authenticatedRouteRouteImport } from './routes/(authenticated)/route';
 
-const AuthLoginLazyRouteImport = createFileRoute('/auth/login')()
+const AuthLoginLazyRouteImport = createFileRoute('/auth/login')();
 const authenticatedResidentIndexLazyRouteImport = createFileRoute(
-  '/(authenticated)/resident/',
-)()
+    '/(authenticated)/resident/'
+)();
 const authenticatedHouseIndexLazyRouteImport = createFileRoute(
-  '/(authenticated)/house/',
-)()
+    '/(authenticated)/house/'
+)();
 const authenticatedDashboardIndexLazyRouteImport = createFileRoute(
-  '/(authenticated)/dashboard/',
-)()
+    '/(authenticated)/dashboard/'
+)();
+const authenticatedBillIndexLazyRouteImport = createFileRoute(
+    '/(authenticated)/bill/'
+)();
 
 const authenticatedRouteRoute = authenticatedRouteRouteImport.update({
-  id: '/(authenticated)',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: '/(authenticated)',
+    getParentRoute: () => rootRouteImport,
+} as any);
 const AuthLoginLazyRoute = AuthLoginLazyRouteImport.update({
-  id: '/auth/login',
-  path: '/auth/login',
-  getParentRoute: () => rootRouteImport,
-} as any).lazy(() => import('./routes/auth/login.lazy').then((d) => d.Route))
+    id: '/auth/login',
+    path: '/auth/login',
+    getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/auth/login.lazy').then((d) => d.Route));
 const authenticatedResidentIndexLazyRoute =
-  authenticatedResidentIndexLazyRouteImport
-    .update({
-      id: '/resident/',
-      path: '/resident/',
-      getParentRoute: () => authenticatedRouteRoute,
-    } as any)
-    .lazy(() =>
-      import('./routes/(authenticated)/resident/index.lazy').then(
-        (d) => d.Route,
-      ),
-    )
+    authenticatedResidentIndexLazyRouteImport
+        .update({
+            id: '/resident/',
+            path: '/resident/',
+            getParentRoute: () => authenticatedRouteRoute,
+        } as any)
+        .lazy(() =>
+            import('./routes/(authenticated)/resident/index.lazy').then(
+                (d) => d.Route
+            )
+        );
 const authenticatedHouseIndexLazyRoute = authenticatedHouseIndexLazyRouteImport
-  .update({
-    id: '/house/',
-    path: '/house/',
-    getParentRoute: () => authenticatedRouteRoute,
-  } as any)
-  .lazy(() =>
-    import('./routes/(authenticated)/house/index.lazy').then((d) => d.Route),
-  )
-const authenticatedDashboardIndexLazyRoute =
-  authenticatedDashboardIndexLazyRouteImport
     .update({
-      id: '/dashboard/',
-      path: '/dashboard/',
-      getParentRoute: () => authenticatedRouteRoute,
+        id: '/house/',
+        path: '/house/',
+        getParentRoute: () => authenticatedRouteRoute,
     } as any)
     .lazy(() =>
-      import('./routes/(authenticated)/dashboard/index.lazy').then(
-        (d) => d.Route,
-      ),
-    )
+        import('./routes/(authenticated)/house/index.lazy').then((d) => d.Route)
+    );
+const authenticatedDashboardIndexLazyRoute =
+    authenticatedDashboardIndexLazyRouteImport
+        .update({
+            id: '/dashboard/',
+            path: '/dashboard/',
+            getParentRoute: () => authenticatedRouteRoute,
+        } as any)
+        .lazy(() =>
+            import('./routes/(authenticated)/dashboard/index.lazy').then(
+                (d) => d.Route
+            )
+        );
+const authenticatedBillIndexLazyRoute = authenticatedBillIndexLazyRouteImport
+    .update({
+        id: '/bill/',
+        path: '/bill/',
+        getParentRoute: () => authenticatedRouteRoute,
+    } as any)
+    .lazy(() =>
+        import('./routes/(authenticated)/bill/index.lazy').then((d) => d.Route)
+    );
 
 export interface FileRoutesByFullPath {
-  '/auth/login': typeof AuthLoginLazyRoute
-  '/dashboard/': typeof authenticatedDashboardIndexLazyRoute
-  '/house/': typeof authenticatedHouseIndexLazyRoute
-  '/resident/': typeof authenticatedResidentIndexLazyRoute
+    '/auth/login': typeof AuthLoginLazyRoute;
+    '/bill/': typeof authenticatedBillIndexLazyRoute;
+    '/dashboard/': typeof authenticatedDashboardIndexLazyRoute;
+    '/house/': typeof authenticatedHouseIndexLazyRoute;
+    '/resident/': typeof authenticatedResidentIndexLazyRoute;
 }
 export interface FileRoutesByTo {
-  '/auth/login': typeof AuthLoginLazyRoute
-  '/dashboard': typeof authenticatedDashboardIndexLazyRoute
-  '/house': typeof authenticatedHouseIndexLazyRoute
-  '/resident': typeof authenticatedResidentIndexLazyRoute
+    '/auth/login': typeof AuthLoginLazyRoute;
+    '/bill': typeof authenticatedBillIndexLazyRoute;
+    '/dashboard': typeof authenticatedDashboardIndexLazyRoute;
+    '/house': typeof authenticatedHouseIndexLazyRoute;
+    '/resident': typeof authenticatedResidentIndexLazyRoute;
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport
-  '/(authenticated)': typeof authenticatedRouteRouteWithChildren
-  '/auth/login': typeof AuthLoginLazyRoute
-  '/(authenticated)/dashboard/': typeof authenticatedDashboardIndexLazyRoute
-  '/(authenticated)/house/': typeof authenticatedHouseIndexLazyRoute
-  '/(authenticated)/resident/': typeof authenticatedResidentIndexLazyRoute
+    __root__: typeof rootRouteImport;
+    '/(authenticated)': typeof authenticatedRouteRouteWithChildren;
+    '/auth/login': typeof AuthLoginLazyRoute;
+    '/(authenticated)/bill/': typeof authenticatedBillIndexLazyRoute;
+    '/(authenticated)/dashboard/': typeof authenticatedDashboardIndexLazyRoute;
+    '/(authenticated)/house/': typeof authenticatedHouseIndexLazyRoute;
+    '/(authenticated)/resident/': typeof authenticatedResidentIndexLazyRoute;
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/auth/login' | '/dashboard/' | '/house/' | '/resident/'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/auth/login' | '/dashboard' | '/house' | '/resident'
-  id:
-    | '__root__'
-    | '/(authenticated)'
-    | '/auth/login'
-    | '/(authenticated)/dashboard/'
-    | '/(authenticated)/house/'
-    | '/(authenticated)/resident/'
-  fileRoutesById: FileRoutesById
+    fileRoutesByFullPath: FileRoutesByFullPath;
+    fullPaths:
+        | '/auth/login'
+        | '/bill/'
+        | '/dashboard/'
+        | '/house/'
+        | '/resident/';
+    fileRoutesByTo: FileRoutesByTo;
+    to: '/auth/login' | '/bill' | '/dashboard' | '/house' | '/resident';
+    id:
+        | '__root__'
+        | '/(authenticated)'
+        | '/auth/login'
+        | '/(authenticated)/bill/'
+        | '/(authenticated)/dashboard/'
+        | '/(authenticated)/house/'
+        | '/(authenticated)/resident/';
+    fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
-  authenticatedRouteRoute: typeof authenticatedRouteRouteWithChildren
-  AuthLoginLazyRoute: typeof AuthLoginLazyRoute
+    authenticatedRouteRoute: typeof authenticatedRouteRouteWithChildren;
+    AuthLoginLazyRoute: typeof AuthLoginLazyRoute;
 }
 
 declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/(authenticated)': {
-      id: '/(authenticated)'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof authenticatedRouteRouteImport
-      parentRoute: typeof rootRouteImport
+    interface FileRoutesByPath {
+        '/(authenticated)': {
+            id: '/(authenticated)';
+            path: '';
+            fullPath: '';
+            preLoaderRoute: typeof authenticatedRouteRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/auth/login': {
+            id: '/auth/login';
+            path: '/auth/login';
+            fullPath: '/auth/login';
+            preLoaderRoute: typeof AuthLoginLazyRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/(authenticated)/resident/': {
+            id: '/(authenticated)/resident/';
+            path: '/resident';
+            fullPath: '/resident/';
+            preLoaderRoute: typeof authenticatedResidentIndexLazyRouteImport;
+            parentRoute: typeof authenticatedRouteRoute;
+        };
+        '/(authenticated)/house/': {
+            id: '/(authenticated)/house/';
+            path: '/house';
+            fullPath: '/house/';
+            preLoaderRoute: typeof authenticatedHouseIndexLazyRouteImport;
+            parentRoute: typeof authenticatedRouteRoute;
+        };
+        '/(authenticated)/dashboard/': {
+            id: '/(authenticated)/dashboard/';
+            path: '/dashboard';
+            fullPath: '/dashboard/';
+            preLoaderRoute: typeof authenticatedDashboardIndexLazyRouteImport;
+            parentRoute: typeof authenticatedRouteRoute;
+        };
+        '/(authenticated)/bill/': {
+            id: '/(authenticated)/bill/';
+            path: '/bill';
+            fullPath: '/bill/';
+            preLoaderRoute: typeof authenticatedBillIndexLazyRouteImport;
+            parentRoute: typeof authenticatedRouteRoute;
+        };
     }
-    '/auth/login': {
-      id: '/auth/login'
-      path: '/auth/login'
-      fullPath: '/auth/login'
-      preLoaderRoute: typeof AuthLoginLazyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/(authenticated)/resident/': {
-      id: '/(authenticated)/resident/'
-      path: '/resident'
-      fullPath: '/resident/'
-      preLoaderRoute: typeof authenticatedResidentIndexLazyRouteImport
-      parentRoute: typeof authenticatedRouteRoute
-    }
-    '/(authenticated)/house/': {
-      id: '/(authenticated)/house/'
-      path: '/house'
-      fullPath: '/house/'
-      preLoaderRoute: typeof authenticatedHouseIndexLazyRouteImport
-      parentRoute: typeof authenticatedRouteRoute
-    }
-    '/(authenticated)/dashboard/': {
-      id: '/(authenticated)/dashboard/'
-      path: '/dashboard'
-      fullPath: '/dashboard/'
-      preLoaderRoute: typeof authenticatedDashboardIndexLazyRouteImport
-      parentRoute: typeof authenticatedRouteRoute
-    }
-  }
 }
 
 interface authenticatedRouteRouteChildren {
-  authenticatedDashboardIndexLazyRoute: typeof authenticatedDashboardIndexLazyRoute
-  authenticatedHouseIndexLazyRoute: typeof authenticatedHouseIndexLazyRoute
-  authenticatedResidentIndexLazyRoute: typeof authenticatedResidentIndexLazyRoute
+    authenticatedBillIndexLazyRoute: typeof authenticatedBillIndexLazyRoute;
+    authenticatedDashboardIndexLazyRoute: typeof authenticatedDashboardIndexLazyRoute;
+    authenticatedHouseIndexLazyRoute: typeof authenticatedHouseIndexLazyRoute;
+    authenticatedResidentIndexLazyRoute: typeof authenticatedResidentIndexLazyRoute;
 }
 
 const authenticatedRouteRouteChildren: authenticatedRouteRouteChildren = {
-  authenticatedDashboardIndexLazyRoute: authenticatedDashboardIndexLazyRoute,
-  authenticatedHouseIndexLazyRoute: authenticatedHouseIndexLazyRoute,
-  authenticatedResidentIndexLazyRoute: authenticatedResidentIndexLazyRoute,
-}
+    authenticatedBillIndexLazyRoute: authenticatedBillIndexLazyRoute,
+    authenticatedDashboardIndexLazyRoute: authenticatedDashboardIndexLazyRoute,
+    authenticatedHouseIndexLazyRoute: authenticatedHouseIndexLazyRoute,
+    authenticatedResidentIndexLazyRoute: authenticatedResidentIndexLazyRoute,
+};
 
 const authenticatedRouteRouteWithChildren =
-  authenticatedRouteRoute._addFileChildren(authenticatedRouteRouteChildren)
+    authenticatedRouteRoute._addFileChildren(authenticatedRouteRouteChildren);
 
 const rootRouteChildren: RootRouteChildren = {
-  authenticatedRouteRoute: authenticatedRouteRouteWithChildren,
-  AuthLoginLazyRoute: AuthLoginLazyRoute,
-}
+    authenticatedRouteRoute: authenticatedRouteRouteWithChildren,
+    AuthLoginLazyRoute: AuthLoginLazyRoute,
+};
 export const routeTree = rootRouteImport
-  ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+    ._addFileChildren(rootRouteChildren)
+    ._addFileTypes<FileRouteTypes>();

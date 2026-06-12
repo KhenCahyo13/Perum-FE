@@ -35,9 +35,7 @@ const DataPreviewBase = ({
             {titlePosition === 'top' && (
                 <p className="text-sm text-muted-foreground">{title}</p>
             )}
-            <p className={cn('text-sm font-medium', valueClassName)}>
-                {value}
-            </p>
+            <p className={cn('text-sm font-medium', valueClassName)}>{value}</p>
             {titlePosition === 'bottom' && (
                 <p className="text-sm text-muted-foreground">{title}</p>
             )}

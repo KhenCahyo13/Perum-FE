@@ -8,28 +8,20 @@ import type { ResidentList } from '@/types/resident';
 export const createResidentListTableColumns = (): ColumnDef<ResidentList>[] => [
     {
         accessorKey: '#',
-        cell: ({ row }) => (
-            <DataTableCell>
-                {row.index + 1}
-            </DataTableCell>
-        ),
+        cell: ({ row }) => <DataTableCell>{row.index + 1}</DataTableCell>,
         header: '#',
     },
     {
         accessorKey: 'fullName',
         cell: ({ row }) => (
-            <DataTableCell>
-                {row.original.fullName}
-            </DataTableCell>
+            <DataTableCell>{row.original.fullName}</DataTableCell>
         ),
         header: 'Nama Lengkap',
     },
     {
         accessorKey: 'phoneNumber',
         cell: ({ row }) => (
-            <DataTableCell>
-                {row.original.phoneNumber}
-            </DataTableCell>
+            <DataTableCell>{row.original.phoneNumber}</DataTableCell>
         ),
         header: 'No. Telepon',
     },

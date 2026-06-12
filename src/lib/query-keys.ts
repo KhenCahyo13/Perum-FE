@@ -1,7 +1,19 @@
+import type { FetchBillsParams } from '@/api/bills';
 import type { FetchHousesParams } from '@/api/houses';
 import type { FetchResidentsParams } from '@/api/residents';
 
 export const queryKeys = {
+    bills: {
+        all: ['bills'] as const,
+        detail: (id: string) => [...queryKeys.bills.all, 'detail', id] as const,
+        list: (params?: FetchBillsParams) =>
+            [...queryKeys.bills.all, 'list', params] as const,
+        stats: () => [...queryKeys.bills.all, 'stats'] as const,
+    },
+    feeTypes: {
+        all: ['fee-types'] as const,
+        list: () => [...queryKeys.feeTypes.all, 'list'] as const,
+    },
     houses: {
         all: ['houses'] as const,
         detail: (id: string) =>

@@ -12,6 +12,7 @@ import {
     FieldError,
     FieldLabel,
 } from '@/components/ui/field';
+import { SearchableSelect } from '@/components/ui/searchable-select';
 import {
     Select,
     SelectContent,
@@ -32,6 +33,7 @@ type RhSelectInputProps<
     options: SelectOption[];
     placeholder?: string;
     required?: boolean;
+    searchable?: boolean;
 };
 
 function RhSelectInputBase<
@@ -45,6 +47,7 @@ function RhSelectInputBase<
     options,
     placeholder,
     required = false,
+    searchable = false,
 }: RhSelectInputProps<TFieldValues, TName>) {
     return (
         <Controller
@@ -55,9 +58,6 @@ function RhSelectInputBase<
                     field.value === null || field.value === undefined
                         ? ''
                         : String(field.value);
-                const selectedOption = options.find(
-                    (option) => String(option.value) === fieldValue
-                );
 
                 return (
                     <Field data-invalid={fieldState.invalid}>
@@ -72,38 +72,55 @@ function RhSelectInputBase<
                         {description && (
                             <FieldDescription>{description}</FieldDescription>
                         )}
-                        <Select
-                            onValueChange={field.onChange}
-                            value={fieldValue}
-                        >
-                            <SelectTrigger
-                                aria-invalid={fieldState.invalid}
-                                className="w-full rounded-full bg-muted/50 px-4 shadow-none"
+                        {searchable ? (
+                            <SearchableSelect
+                                allLabel={placeholder ?? 'Pilih...'}
+                                onValueChange={(val) =>
+                                    field.onChange(val ?? '')
+                                }
+                                options={options}
+                                value={fieldValue || undefined}
+                            />
+                        ) : (
+                            <Select
+                                onValueChange={field.onChange}
+                                value={fieldValue}
                             >
-                                <span
-                                    className={cn(
-                                        'truncate',
-                                        !selectedOption &&
-                                            'text-muted-foreground'
-                                    )}
+                                <SelectTrigger
+                                    aria-invalid={fieldState.invalid}
+                                    className="w-full rounded-full bg-muted/50 px-4 shadow-none"
                                 >
-                                    {selectedOption?.label ?? placeholder}
-                                </span>
-                            </SelectTrigger>
-                            <SelectContent
-                                className="max-h-40"
-                                position="popper"
-                            >
-                                {options.map((opt) => (
-                                    <SelectItem
-                                        key={opt.value}
-                                        value={String(opt.value)}
+                                    <span
+                                        className={cn(
+                                            'truncate',
+                                            !options.find(
+                                                (o) =>
+                                                    String(o.value) ===
+                                                    fieldValue
+                                            ) && 'text-muted-foreground'
+                                        )}
                                     >
-                                        {opt.label}
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
+                                        {options.find(
+                                            (o) =>
+                                                String(o.value) === fieldValue
+                                        )?.label ?? placeholder}
+                                    </span>
+                                </SelectTrigger>
+                                <SelectContent
+                                    className="max-h-40"
+                                    position="popper"
+                                >
+                                    {options.map((opt) => (
+                                        <SelectItem
+                                            key={opt.value}
+                                            value={String(opt.value)}
+                                        >
+                                            {opt.label}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        )}
                         {fieldState.invalid && (
                             <FieldError errors={[fieldState.error]} />
                         )}
