@@ -3,6 +3,7 @@ import type { ColumnDef } from '@tanstack/react-table';
 import { DataTableCell } from '@/components/datatable';
 import { Badge } from '@/components/ui/badge';
 import { formatCurrency } from '@/lib/currency';
+import { formatDate } from '@/lib/datetime';
 import type { ExpenseList } from '@/types/expense';
 
 export const createExpenseListTableColumns = (): ColumnDef<ExpenseList>[] => [
@@ -27,7 +28,9 @@ export const createExpenseListTableColumns = (): ColumnDef<ExpenseList>[] => [
     },
     {
         accessorKey: 'date',
-        cell: ({ row }) => <DataTableCell>{row.original.date}</DataTableCell>,
+        cell: ({ row }) => (
+            <DataTableCell>{formatDate(row.original.date)}</DataTableCell>
+        ),
         header: 'Tanggal',
     },
     {
