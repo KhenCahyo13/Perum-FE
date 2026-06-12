@@ -2,11 +2,15 @@ import {
     IconFileInvoice,
     IconHome2,
     IconLayoutGrid,
+    IconLoader2,
     IconLogout,
     IconMoneybag,
     IconUsers,
 } from '@tabler/icons-react';
+import { useMutation } from '@tanstack/react-query';
+import { useNavigate, useRouterState } from '@tanstack/react-router';
 
+import { logout } from '@/api/auth';
 import { useAuthStore } from '@/stores/auth-store';
 
 import { Avatar, AvatarFallback } from '../ui/avatar';
@@ -54,7 +58,19 @@ export const navItems = [
 ];
 
 export const Navbar = () => {
-    const { user } = useAuthStore();
+    const { clearAuth, user } = useAuthStore();
+    const navigate = useNavigate();
+    const pathname = useRouterState({
+        select: (s) => s.location.pathname,
+    });
+
+    const { isPending, mutate: handleLogout } = useMutation({
+        mutationFn: logout,
+        onSettled: () => {
+            clearAuth();
+            navigate({ to: '/auth/login' });
+        },
+    });
 
     return (
         <header>
@@ -64,7 +80,10 @@ export const Navbar = () => {
                     <NavigationMenuList className="gap-x-3">
                         {navItems.map((nav) => (
                             <NavigationMenuItem key={nav.label}>
-                                <NavigationMenuLink href={nav.href}>
+                                <NavigationMenuLink
+                                    data-active={pathname.startsWith(nav.href)}
+                                    href={nav.href}
+                                >
                                     <nav.icon className="mr-2" />
                                     {nav.label}
                                 </NavigationMenuLink>
@@ -84,8 +103,17 @@ export const Navbar = () => {
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="center" className="min-w-44">
-                        <DropdownMenuItem className="text-destructive">
-                            <IconLogout /> Logout
+                        <DropdownMenuItem
+                            className="text-destructive"
+                            disabled={isPending}
+                            onClick={() => handleLogout()}
+                        >
+                            {isPending ? (
+                                <IconLoader2 className="animate-spin" />
+                            ) : (
+                                <IconLogout />
+                            )}
+                            Logout
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>

@@ -11,6 +11,10 @@ export const queryKeys = {
             [...queryKeys.bills.all, 'list', params] as const,
         stats: () => [...queryKeys.bills.all, 'stats'] as const,
     },
+    dashboard: {
+        all: ['dashboard'] as const,
+        summary: () => [...queryKeys.dashboard.all, 'summary'] as const,
+    },
     expenseCategories: {
         all: ['expense-categories'] as const,
         list: () => [...queryKeys.expenseCategories.all, 'list'] as const,
